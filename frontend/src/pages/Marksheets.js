@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { marksheetAPI } from '../api';
 import AppLayout from '../components/AppLayout';
@@ -99,24 +99,32 @@ const Marksheets = () => {
     return params;
   }, [filters, page, pageSize, search]);
 
-  const fetchMarksheets = async () => {
+  const applyMarksheetResponse = (response) => {
+    setMarksheets(response.data.marksheets);
+    setPages(response.data.pages);
+    setTotal(response.data.total);
+  };
+
+  const refreshMarksheets = useCallback(async (params = queryParams) => {
     setLoading(true);
     setError('');
     try {
-      const response = await marksheetAPI.getAllMarksheets(queryParams);
-      setMarksheets(response.data.marksheets);
-      setPages(response.data.pages);
-      setTotal(response.data.total);
+      const response = await marksheetAPI.getAllMarksheets(params);
+      applyMarksheetResponse(response);
     } catch (err) {
       setError('Failed to fetch marksheets');
     } finally {
       setLoading(false);
     }
-  };
+  }, [queryParams]);
 
   useEffect(() => {
-    fetchMarksheets();
-  }, [queryParams]);
+    const loadMarksheets = async () => {
+      await refreshMarksheets(queryParams);
+    };
+
+    loadMarksheets();
+  }, [queryParams, refreshMarksheets]);
 
   const handleSearch = (value) => {
     setSearch(value);
@@ -172,7 +180,7 @@ const Marksheets = () => {
       await marksheetAPI.updateMarksheet(id, data);
       setEditingMarksheet(null);
       setShowEditForm(false);
-      fetchMarksheets();
+      refreshMarksheets();
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to update marksheet');
     }
@@ -182,7 +190,7 @@ const Marksheets = () => {
     if (window.confirm('Are you sure you want to delete this marksheet?')) {
       try {
         await marksheetAPI.deleteMarksheet(id);
-        fetchMarksheets();
+        refreshMarksheets();
       } catch (err) {
         setError('Failed to delete marksheet');
       }
@@ -192,7 +200,7 @@ const Marksheets = () => {
   const handleToggleIssued = async (id) => {
     try {
       await marksheetAPI.toggleIssuedStatus(id);
-      fetchMarksheets();
+      refreshMarksheets();
     } catch (err) {
       setError('Failed to update status');
     }
