@@ -1,0 +1,136 @@
+.filters-panel {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  background: var(--surface-1);
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  animation: riseIn 0.45s ease;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-700);
+}
+
+.filter-group label {
+  font-weight: 600;
+  color: var(--ink-500);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.filter-group input,
+.filter-group select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  font-size: 14px;
+  background: var(--field-bg);
+  color: var(--field-text);
+  color-scheme: light;
+}
+
+[data-theme='dark'] .filter-group input,
+[data-theme='dark'] .filter-group select {
+  color-scheme: dark;
+}
+
+.filters-inline {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.header-actions .primary-btn {
+  width: auto;
+}
+
+.header-actions .pill {
+  white-space: nowrap;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  background: var(--surface-1);
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.edit-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.edit-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-size {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink-500);
+  font-size: 13px;
+}
+
+.page-size select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  background: var(--field-bg);
+  color: var(--field-text);
+}
+
+.page-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.page-buttons .ghost-btn.is-active {
+  background: var(--blue-100);
+  color: var(--blue-700);
+  border-color: rgba(12, 102, 228, 0.3);
+}
+
+@media (max-width: 1100px) {
+  .filters-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .filters-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

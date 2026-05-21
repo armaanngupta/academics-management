@@ -1,0 +1,126 @@
+.dashboard-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  animation: riseIn 0.45s ease;
+}
+
+.summary-card {
+  background: var(--surface-1);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-soft);
+  display: grid;
+  gap: 6px;
+}
+
+.summary-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-500);
+  font-weight: 600;
+}
+
+.summary-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+.summary-meta {
+  color: var(--ink-500);
+  font-size: 13px;
+}
+
+.summary-highlight {
+  background: var(--blue-100);
+  border-color: rgba(12, 102, 228, 0.2);
+}
+
+.summary-highlight .summary-value {
+  font-size: 36px;
+  color: var(--blue-700);
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  animation: riseIn 0.5s ease;
+}
+
+.chart-card {
+  background: var(--surface-1);
+  border-radius: 16px;
+  padding: 16px 18px 10px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 260px;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.chart-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.chart-note {
+  font-size: 12px;
+  color: var(--ink-500);
+}
+
+.chart-empty {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  color: var(--ink-500);
+  font-size: 14px;
+}
+
+.insight-list {
+  display: grid;
+  gap: 12px;
+}
+
+.insight-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--ink-700);
+  font-size: 13px;
+}
+
+.insight-item strong {
+  color: var(--ink-900);
+}
+
+@media (max-width: 1100px) {
+  .dashboard-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-summary {
+    grid-template-columns: 1fr;
+  }
+}
