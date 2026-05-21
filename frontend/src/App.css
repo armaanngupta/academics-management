@@ -1,0 +1,222 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue-100: #e9f2ff;
+  --blue-500: #3b82f6;
+  --blue-600: #0c66e4;
+  --blue-700: #0052cc;
+  --action-600: #1f4f7a;
+  --action-700: #173d5e;
+  --action-border: #143652;
+  --ink-900: #1d2125;
+  --ink-700: #42526e;
+  --ink-500: #6b778c;
+  --ink-300: #a5adba;
+  --surface-0: #f7f8fa;
+  --surface-1: #ffffff;
+  --surface-2: #f1f2f4;
+  --field-bg: #ffffff;
+  --field-text: #1d2125;
+  --field-placeholder: #6b778c;
+  --border-strong: #c7d1db;
+  --border-soft: #e4e8ee;
+  --success-100: #dcfff1;
+  --success-700: #0f8a65;
+  --warning-100: #fff4d6;
+  --warning-700: #946100;
+  --danger-100: #ffe9e9;
+  --danger-700: #b42318;
+  --login-bg-opacity: 0.18;
+  --shadow-lg: none;
+  --shadow-md: none;
+  --shadow-sm: none;
+}
+
+[data-theme='dark'] {
+  --blue-100: rgba(12, 102, 228, 0.16);
+  --blue-500: #4c8dff;
+  --blue-600: #2f7ef0;
+  --blue-700: #1f6fda;
+  --action-600: #2c5a86;
+  --action-700: #23496d;
+  --action-border: #3a6b9d;
+  --ink-900: #f4f6f8;
+  --ink-700: #c9d1d9;
+  --ink-500: #9aa4b2;
+  --ink-300: #6b778c;
+  --surface-0: #0f141a;
+  --surface-1: #151b23;
+  --surface-2: #1c232d;
+  --field-bg: #101720;
+  --field-text: #f4f6f8;
+  --field-placeholder: #7d8897;
+  --border-strong: #3a4556;
+  --border-soft: #2b3441;
+  --success-100: rgba(15, 138, 101, 0.2);
+  --success-700: #34d399;
+  --warning-100: rgba(148, 97, 0, 0.2);
+  --warning-700: #fbbf24;
+  --danger-100: rgba(180, 35, 24, 0.2);
+  --danger-700: #f87171;
+  --login-bg-opacity: 0.1;
+  --shadow-lg: none;
+  --shadow-md: none;
+  --shadow-sm: none;
+}
+
+body {
+  font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, sans-serif;
+  background-color: var(--surface-0);
+  color: var(--ink-900);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  background: var(--field-bg);
+  color: var(--field-text);
+  border-color: var(--border-soft);
+  color-scheme: light;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--field-placeholder);
+}
+
+select option {
+  background: var(--field-bg);
+  color: var(--field-text);
+}
+
+[data-theme='dark'] input,
+[data-theme='dark'] select,
+[data-theme='dark'] textarea {
+  color-scheme: dark;
+}
+
+.primary-btn {
+  background: var(--action-600);
+  color: #fff;
+  border: 1px solid var(--action-border);
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.primary-btn:hover {
+  background: var(--action-700);
+  border-color: var(--action-700);
+}
+
+.ghost-btn {
+  background: transparent;
+  color: var(--ink-700);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.ghost-btn:hover {
+  color: var(--ink-900);
+  border-color: var(--border-strong);
+  background: var(--surface-1);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--surface-2);
+  color: var(--ink-700);
+}
+
+.app-page {
+  min-height: 100vh;
+  background: var(--surface-0);
+}
+
+[data-theme='dark'] .app-page {
+  background: var(--surface-0);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle-indicator {
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  position: relative;
+}
+
+.theme-toggle-indicator::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink-700);
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+[data-theme='dark'] .theme-toggle-indicator::after {
+  transform: translateX(16px);
+  background: var(--blue-500);
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
