@@ -5,7 +5,9 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import CreateMarksheet from './pages/CreateMarksheet';
 import Marksheets from './pages/Marksheets';
+import Students from './pages/Students';
 import AdminManagement from './pages/AdminManagement';
+import AcademicManagement from './pages/AcademicManagement';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -40,6 +42,22 @@ function App() {
             element={
               <PrivateRoute>
                 <Marksheets />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/students"
+            element={
+              <PrivateRoute>
+                <Students />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/settings/academics"
+            element={
+              <PrivateRoute>
+                <AcademicManagement />
               </PrivateRoute>
             }
           />

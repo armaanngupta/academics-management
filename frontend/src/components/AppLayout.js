@@ -52,6 +52,15 @@ const AppLayout = ({ children }) => {
             <NavLink className={({ isActive }) => `sidebar-link${isActive ? ' is-active' : ''}`} to="/marksheets">
               Marksheets
             </NavLink>
+            <NavLink className={({ isActive }) => `sidebar-link${isActive ? ' is-active' : ''}`} to="/students">
+              Students
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => `sidebar-link${isActive ? ' is-active' : ''}`}
+              to="/settings/academics"
+            >
+              Academic Data
+            </NavLink>
             {admin?.role === 'superadmin' && (
               <NavLink
                 className={({ isActive }) => `sidebar-link${isActive ? ' is-active' : ''}`}

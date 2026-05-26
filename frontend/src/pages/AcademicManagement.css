@@ -1,0 +1,164 @@
+.academic-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.academic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.academic-panel {
+  background: var(--surface-1);
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.academic-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.academic-panel h2 {
+  font-size: 18px;
+  color: var(--ink-900);
+}
+
+.muted-label,
+.saving-text {
+  font-size: 12px;
+  color: var(--ink-500);
+  font-weight: 600;
+}
+
+.compact-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.compact-form input,
+.modal-field input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  background: var(--field-bg);
+  color: var(--ink-900);
+  font-size: 14px;
+}
+
+.compact-form input:disabled {
+  opacity: 0.6;
+}
+
+.stack-list,
+.chip-list {
+  display: grid;
+  gap: 10px;
+}
+
+.stack-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid transparent;
+}
+
+.stack-row.is-selected {
+  border-color: rgba(12, 102, 228, 0.35);
+  background: var(--blue-100);
+}
+
+.row-main {
+  border: 0;
+  background: transparent;
+  color: var(--ink-900);
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  gap: 2px;
+}
+
+.row-main strong {
+  font-size: 14px;
+}
+
+.row-main span {
+  font-size: 12px;
+  color: var(--ink-500);
+}
+
+.editable-chip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+
+.editable-chip span {
+  color: var(--ink-900);
+  font-size: 14px;
+  min-width: 0;
+}
+
+.editable-chip button {
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  background: var(--field-bg);
+  color: var(--ink-700);
+  padding: 5px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ghost-btn.danger,
+.editable-chip button:last-child {
+  color: var(--danger-700);
+  border-color: rgba(180, 35, 24, 0.25);
+}
+
+.modal-field {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-700);
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .academic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .academic-stats {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .compact-form,
+  .stack-row,
+  .editable-chip {
+    grid-template-columns: 1fr;
+  }
+}

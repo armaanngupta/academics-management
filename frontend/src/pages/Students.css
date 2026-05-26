@@ -1,0 +1,79 @@
+.student-modal {
+  width: min(520px, 94vw);
+}
+
+.student-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.student-form-note {
+  font-size: 13px;
+  color: var(--ink-500);
+  margin: 0;
+}
+
+.student-form-error {
+  font-size: 13px;
+  color: var(--danger-700);
+  background: var(--danger-100);
+  padding: 9px 12px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.student-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.student-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+.student-field input,
+.student-field select {
+  padding: 10px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  font-size: 14px;
+  background: var(--field-bg);
+  color: var(--field-text);
+  transition: border 0.15s ease;
+}
+
+.student-field input:focus,
+.student-field select:focus {
+  outline: none;
+  border-color: var(--blue-500);
+  background: var(--surface-1);
+}
+
+.student-field input.field-error {
+  border-color: var(--danger-700);
+}
+
+.student-field select:disabled {
+  background: var(--surface-2);
+  cursor: not-allowed;
+}
+
+.student-field-warning {
+  font-size: 12px;
+  color: var(--danger-700);
+  font-weight: 500;
+}
+
+.student-field-hint {
+  font-size: 12px;
+  color: var(--ink-500);
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--ink-500);
+}

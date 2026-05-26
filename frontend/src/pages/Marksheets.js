@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { marksheetAPI } from '../api';
+import { academicAPI, marksheetAPI } from '../api';
 import AppLayout from '../components/AppLayout';
 import MarksheetForm from '../components/MarksheetForm';
 import MarksheetList from '../components/MarksheetList';
 import SearchBar from '../components/SearchBar';
-import academicsData from '../data/academics.json';
 import './Marksheets.css';
 
 const defaultFilters = {
@@ -31,6 +30,7 @@ const Marksheets = () => {
   const [error, setError] = useState('');
   const [editingMarksheet, setEditingMarksheet] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
+  const [academicData, setAcademicData] = useState({ universities: [] });
   const navigate = useNavigate();
 
   const pageOptions = [10, 20, 25];
@@ -43,7 +43,7 @@ const Marksheets = () => {
     });
   }, []);
 
-  const universities = useMemo(() => academicsData.universities || [], []);
+  const universities = useMemo(() => academicData.universities || [], [academicData]);
   const selectedUniversity = useMemo(
     () => universities.find((uni) => uni.name === filters.university),
     [filters.university, universities]
@@ -98,6 +98,29 @@ const Marksheets = () => {
 
     return params;
   }, [filters, page, pageSize, search]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchAcademicData = async () => {
+      try {
+        const response = await academicAPI.getAll();
+        if (isMounted) {
+          setAcademicData(response.data || { universities: [] });
+        }
+      } catch (err) {
+        if (isMounted) {
+          setAcademicData({ universities: [] });
+        }
+      }
+    };
+
+    fetchAcademicData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const applyMarksheetResponse = (response) => {
     setMarksheets(response.data.marksheets);
