@@ -1,36 +1,26 @@
 # Marksheet Management System
 
-A full-stack web application for managing college marksheet records, admin access, and issuance tracking.
+A MERN stack application for college marksheet operations. It manages admins, students, marksheets, academic master data, and issued-status tracking from a single authenticated dashboard.
 
-The app includes:
-- a React frontend for login, dashboard, marksheet creation, filtering, editing, and admin management
-- an Express and MongoDB backend for authentication, data storage, and reporting
-- role-based access with `superadmin` and `admin`
+## Current Capabilities
 
-## What The App Does
-
-This project is built for institution-side marksheet operations. Admins can create and manage marksheet records, track whether they have been issued, search by student or roll number, and review summary data from the dashboard.
-
-Superadmins can also manage other admin accounts.
-
-## Features
-
-- Secure admin login with JWT-based authentication
-- MongoDB persistence for admins and marksheets
-- Marksheet create, edit, delete, and issued-status toggle
-- Search and advanced filtering for marksheet records
-- Dashboard summary with recent activity and distribution data
-- Superadmin-only admin management
-- Dark mode support
-- Responsive layout for desktop and smaller screens
+- JWT-based admin login with `admin` and `superadmin` roles
+- Dashboard summaries for unissued marksheets, recent activity, academic-year trends, and distribution charts
+- Marksheet CRUD with enrollment number, roll number, marksheet number, academic year, session, university, degree, subject, type, result, remarks, and issued status
+- Search and filtering for marksheets by academic fields, date range, issued status, and student/enrollment text
+- Student directory with manual student creation and marksheet creation from a selected student
+- Student autocomplete while creating marksheets
+- Academic Data page for managing universities, sessions, degrees, and subjects
+- Academic master data is stored in MongoDB, not in a frontend JSON file
+- Superadmin-only admin account management
+- Dark/light theme persistence
 
 ## Tech Stack
 
-- Frontend: React, React Router, Axios, Recharts
+- Frontend: React, React Router, Axios, Recharts, plain CSS
 - Backend: Node.js, Express
 - Database: MongoDB with Mongoose
 - Authentication: JWT and bcrypt
-- Styling: Plain CSS
 
 ## Project Structure
 
@@ -49,98 +39,92 @@ marksheet-management/
 |   |-- src/
 |   |-- .env.example
 |   `-- package.json
-|-- API_DOCUMENTATION.md
-|-- DEPLOYMENT.md
-|-- MONGODB_SETUP.md
-|-- QUICKSTART.md
-|-- TESTING_GUIDE.md
-`-- package.json
+|-- package.json
+`-- README.md
 ```
-
-## Root Scripts
-
-Run these from the project root:
-
-- `npm run dev`: starts backend in watch mode and frontend dev server together
-- `npm run start`: starts backend and frontend together without backend nodemon
-- `npm run backend:dev`: starts only the backend in dev mode
-- `npm run backend`: starts only the backend
-- `npm run frontend`: starts only the frontend
-- `npm run frontend:build`: builds the frontend
-- `npm run install:all`: installs dependencies in both `backend` and `frontend`
-
-`npm run dev` is the main one-command workflow.
 
 ## Setup
 
-### 1. Install dependencies
-
-From the root:
+Install dependencies from the project root:
 
 ```bash
 npm install
 npm run install:all
 ```
 
-`npm install` at the root installs the root helper dependency used to run both apps together. `npm run install:all` installs the actual frontend and backend app dependencies.
-
-### 2. Configure backend environment
-
-Create `backend/.env` from `backend/.env.example`.
-
-Required values:
+Create `backend/.env` from `backend/.env.example`:
 
 ```env
-MONGODB_URI=your_mongodb_connection_string
+MONGODB_URI=mongodb://localhost:27017/marksheet_management
 PORT=5000
 JWT_SECRET=replace_with_a_long_random_secret
+NODE_ENV=development
 ```
 
-### 3. Configure frontend environment
-
-Create `frontend/.env` from `frontend/.env.example` if needed.
-
-Example:
+Create `frontend/.env` from `frontend/.env.example` if the backend URL differs:
 
 ```env
 REACT_APP_API_URL=http://localhost:5000/api
 REACT_APP_ENV=development
 ```
 
-Note: the current frontend API client in [frontend/src/api.js](frontend/src/api.js) is still hardcoded to `http://localhost:5000/api`, so production deployment should align with that file or update it to use the environment variable.
-
-### 4. Start the app
+Start both apps:
 
 ```bash
 npm run dev
 ```
 
-Default local URLs:
+Default URLs:
 
 - Frontend: `http://localhost:3000`
 - Backend: `http://localhost:5000`
 
-## Authentication And Roles
+## Scripts
 
-- `superadmin`: can log in, manage marksheets, and create or delete other admins
-- `admin`: can log in and manage marksheets
+Run these from the project root:
 
-Admin data is stored in MongoDB, so deployed admins continue to exist as long as the deployed backend points to the same database.
+- `npm run dev`: start backend in watch mode and frontend together
+- `npm run start`: start backend and frontend together
+- `npm run backend:dev`: start only the backend with nodemon
+- `npm run backend`: start only the backend
+- `npm run frontend`: start only the frontend
+- `npm run frontend:build`: build the frontend
+- `npm run install:all`: install backend and frontend dependencies
+- `npm run docker:up`: start Docker Compose services
+- `npm run docker:down`: stop Docker Compose services
+
+## Roles
+
+- `admin`: can manage marksheets, students, and academic master data
+- `superadmin`: has all admin access plus admin-account management
+
+Admin session data is persisted in local storage so refreshes keep the current logged-in admin context until logout or token expiry.
 
 ## Main Screens
 
 - Login
 - Dashboard
-- Marksheet library
-- Create marksheet
-- Admin management
+- Create Marksheet
+- Marksheets Library
+- Students Directory
+- Academic Data
+- Admin Management
+
+## Academic Data
+
+Universities, sessions, degrees, and subjects are stored in MongoDB through the `Academic` model. The old `frontend/src/data/academics.json` file has been removed and is no longer used by the app.
+
+Academic Data access is available to all logged-in admins:
+
+- `GET /api/academics`
+- `PUT /api/academics`
 
 ## API Summary
 
-Authentication:
+Auth:
 
 - `POST /api/auth/login`
-- `POST /api/auth/register`
+- `POST /api/auth/register` superadmin only
 
 Marksheets:
 
@@ -153,14 +137,27 @@ Marksheets:
 - `DELETE /api/marksheets/:id`
 - `PATCH /api/marksheets/:id/toggle-issued`
 
-Admin management:
+Students:
 
-- `GET /api/admins`
-- `POST /api/admins`
-- `DELETE /api/admins/:id`
+- `GET /api/students`
+- `POST /api/students`
+- `GET /api/students/check`
+- `GET /api/students/search`
+
+Academic Data:
+
+- `GET /api/academics`
+- `PUT /api/academics`
+
+Admin Management:
+
+- `GET /api/admins` superadmin only
+- `POST /api/admins` superadmin only
+- `DELETE /api/admins/:id` superadmin only
 
 ## Deployment Notes
 
-- Keep `MONGODB_URI` pointed at the correct production database
-- Keep `JWT_SECRET` stable across restarts unless you want existing sessions invalidated
-- Rotate any secrets that were ever committed or shared accidentally
+- Set `MONGODB_URI` to the production MongoDB database.
+- Keep `JWT_SECRET` stable across backend restarts unless existing sessions should be invalidated.
+- Set `REACT_APP_API_URL` to the deployed backend API URL before building the frontend.
+- Academic master data must exist in MongoDB; it is no longer bundled as a static JSON file.
