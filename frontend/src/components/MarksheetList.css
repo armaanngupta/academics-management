@@ -195,6 +195,85 @@ tbody tr:hover {
   gap: 10px;
 }
 
+.clickable-row {
+  cursor: pointer;
+}
+
+.type-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.type-tag.backlog {
+  background-color: var(--warning-100);
+  color: var(--warning-700);
+}
+
+.type-tag.regular {
+  background-color: var(--success-100);
+  color: var(--success-700);
+}
+
+.result-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.result-badge.pass {
+  background-color: var(--success-100);
+  color: var(--success-700);
+}
+
+.result-badge.fail {
+  background-color: var(--danger-100);
+  color: var(--danger-700);
+}
+
+.detail-card {
+  width: min(680px, 94vw);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 20px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.detail-full {
+  grid-column: 1 / -1;
+}
+
+.detail-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-500);
+}
+
+.detail-value {
+  font-size: 14px;
+  color: var(--ink-900);
+}
+
 .empty-state {
   background: var(--surface-1);
   padding: 60px 20px;

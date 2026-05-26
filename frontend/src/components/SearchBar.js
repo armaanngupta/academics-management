@@ -25,7 +25,7 @@ const SearchBar = ({ onSearch }) => {
       </span>
       <input
         type="text"
-        placeholder="Search by student name or roll number..."
+        placeholder="Search by student name or enrollment number..."
         value={query}
         onChange={handleChange}
       />
