@@ -37,6 +37,18 @@ export const marksheetAPI = {
   toggleIssuedStatus: (id) => axiosInstance.patch(`/marksheets/${id}/toggle-issued`),
 };
 
+export const studentAPI = {
+  getAll: (params = {}) => axiosInstance.get('/students', { params }),
+  create: (data) => axiosInstance.post('/students', data),
+  checkEnrollment: (enrollment) => axiosInstance.get('/students/check', { params: { enrollment } }),
+  search: (q, field) => axiosInstance.get('/students/search', { params: { q, field } }),
+};
+
+export const academicAPI = {
+  getAll: () => axiosInstance.get('/academics'),
+  updateAll: (data) => axiosInstance.put('/academics', data),
+};
+
 export const adminAPI = {
   listAdmins: () => axiosInstance.get('/admins'),
   createAdmin: (data) => axiosInstance.post('/admins', data),

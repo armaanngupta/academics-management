@@ -24,6 +24,8 @@ mongoose
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/marksheets', require('./routes/marksheetRoutes'));
 app.use('/api/admins', require('./routes/adminRoutes'));
+app.use('/api/students', require('./routes/studentRoutes'));
+app.use('/api/academics', require('./routes/academicRoutes'));
 
 // Home route
 app.get('/', (req, res) => {
