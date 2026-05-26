@@ -11,8 +11,14 @@
 .form-container h2 {
   margin-top: 0;
   color: var(--ink-900);
-  margin-bottom: 20px;
+  margin-bottom: 6px;
   font-size: 22px;
+}
+
+.form-note {
+  font-size: 13px;
+  color: var(--ink-500);
+  margin: 0 0 20px;
 }
 
 .form-row {
@@ -59,6 +65,28 @@
   cursor: not-allowed;
 }
 
+.form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.clear-form-btn {
+  padding: 12px 24px;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--field-bg);
+  color: var(--ink-700);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.clear-form-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--ink-300);
+}
+
 .submit-btn {
   background-color: var(--action-600);
   color: #fff;
@@ -68,13 +96,92 @@
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-  width: 100%;
+  flex: 1;
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .submit-btn:hover {
   background-color: var(--action-700);
   border-color: var(--action-700);
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  background: var(--field-bg);
+}
+
+/* override .form-group label margin for radio labels */
+.radio-group label,
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--field-text);
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.radio-option input[type='radio'] {
+  cursor: pointer;
+  accent-color: var(--blue-500);
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.ac-input-wrapper {
+  position: relative;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  z-index: 200;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.autocomplete-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-radius: 6px;
+  margin: 0 4px;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.highlighted {
+  background: var(--surface-2);
+}
+
+.ac-primary {
+  font-size: 14px;
+  color: var(--ink-900);
+  font-weight: 500;
+}
+
+.ac-secondary {
+  font-size: 12px;
+  color: var(--ink-500);
 }
 
 @media (max-width: 768px) {

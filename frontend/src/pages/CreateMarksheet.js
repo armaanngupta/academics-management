@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { marksheetAPI } from '../api';
 import AppLayout from '../components/AppLayout';
 import MarksheetForm from '../components/MarksheetForm';
@@ -9,6 +9,8 @@ const CreateMarksheet = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const prefillStudent = location.state?.student || null;
 
   const handleAddMarksheet = async (data) => {
     setError('');
@@ -38,7 +40,7 @@ const CreateMarksheet = () => {
       {success && <div className="success-message">{success}</div>}
 
       <div className="create-card">
-        <MarksheetForm onSubmit={handleAddMarksheet} />
+        <MarksheetForm onSubmit={handleAddMarksheet} initialData={prefillStudent} />
       </div>
     </AppLayout>
   );
